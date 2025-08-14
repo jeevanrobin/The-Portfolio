@@ -1,0 +1,38 @@
+.scroll-to-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00d4ff, #0077ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+
+  opacity: 0;
+  transform: translateY(40px) scale(0.95) rotate(-18deg);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+  pointer-events: auto;
+}
+
+.scroll-to-top.hide {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95) rotate(-18deg);
+  pointer-events: none;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-2px) scale(1.08);
+}
