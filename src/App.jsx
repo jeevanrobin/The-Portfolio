@@ -6,63 +6,6 @@ import { Link } from "react-scroll";
 
 import "./App.css";
 
-function ScrollToTopButton() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.pageYOffset > 250);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    const homeElement = document.getElementById('home');
-    if (homeElement) {
-      homeElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  if (!visible) return null;
-
-  return (
-    <button
-      onClick={scrollToTop}
-      style={{
-        position: 'fixed',
-        bottom: '30px',
-        right: '30px',
-        width: '50px',
-        height: '50px',
-        borderRadius: '50%',
-        border: '1px solid rgba(0, 212, 255, 0.3)',
-        background: 'rgba(0, 212, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        color: '#00d4ff',
-        fontSize: '20px',
-        cursor: 'pointer',
-        zIndex: 9999,
-        boxShadow: '0 0 20px rgba(0, 212, 255, 0.3)',
-        transition: 'all 0.3s ease'
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.background = 'rgba(0, 212, 255, 0.2)';
-        e.target.style.boxShadow = '0 0 30px rgba(0, 212, 255, 0.5)';
-        e.target.style.transform = 'translateY(-2px)';
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.background = 'rgba(0, 212, 255, 0.1)';
-        e.target.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.3)';
-        e.target.style.transform = 'translateY(0)';
-      }}
-    >
-      ↑
-    </button>
-  );
-}
-
 function AnimatedSection({ children, className = "", animation = "scroll-animate" }) {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -358,7 +301,41 @@ function App() {
         </AnimatedSection>
       </div>
 
-      <ScrollToTopButton />
+      <button
+        onClick={() => {
+          const el = document.getElementById('home');
+          if(el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
+        style={{
+          position: 'fixed',
+          bottom: '30px',
+          right: '30px',
+          width: '50px',
+          height: '50px',
+          borderRadius: '50%',
+          border: '1px solid rgba(0, 212, 255, 0.3)',
+          background: 'rgba(0, 212, 255, 0.1)',
+          backdropFilter: 'blur(10px)',
+          color: '#00d4ff',
+          fontSize: '20px',
+          cursor: 'pointer',
+          zIndex: 9999,
+          boxShadow: '0 0 20px rgba(0, 212, 255, 0.3)',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = 'rgba(0, 212, 255, 0.2)';
+          e.target.style.boxShadow = '0 0 30px rgba(0, 212, 255, 0.5)';
+          e.target.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = 'rgba(0, 212, 255, 0.1)';
+          e.target.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.3)';
+          e.target.style.transform = 'translateY(0)';
+        }}
+      >
+        ↑
+      </button>
     </div>
   );
 }
