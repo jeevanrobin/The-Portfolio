@@ -29,16 +29,41 @@ function App() {
         options={{
           background: { color: { value: "transparent" } },
           fpsLimit: 60,
-          interactivity: {
-            events: { onHover: { enable: true, mode: "repulse" } },
-            modes: { repulse: { distance: 100 } }
-          },
           particles: {
-            color: { value: "#ffffff" },
-            links: { enable: true, color: "#ffffff", distance: 150 },
-            move: { enable: true, speed: 2 },
-            number: { density: { enable: true, area: 800 }, value: 50 },
-            size: { value: 3 }
+            number: {
+              value: 10,
+              density: { enable: false }
+            },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: "none",
+              outModes: {
+                default: "bounce"
+              }
+            },
+            shape: {
+              type: "images",
+              images: [
+                { src: "/icons/github.png", width: 20, height: 20 },
+                { src: "/icons/mail.png", width: 20, height: 20 },
+                { src: "/icons/linkedin.png", width: 20, height: 20 },
+                { src: "/icons/phone.png", width: 20, height: 20 }
+              ]
+            },
+            size: {
+              value: 30,
+              random: false
+            },
+            opacity: {
+              value: 0.8
+            }
+          },
+          emitters: {
+            direction: "none",
+            rate: { quantity: 2, delay: 0.5 },
+            position: { x: 0, y: 50 },
+            size: { width: 100, height: 0 }
           },
           detectRetina: true
         }}

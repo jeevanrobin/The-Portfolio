@@ -14,7 +14,7 @@ export default function Home() {
           >
             <Typewriter
               options={{
-                strings: ["Hello, I am Jeevan Reddy"],
+                strings: ["Hello, I'm Jeevan Reddy 👋"],
                 autoStart: true,
                 loop: true,
                 delay: 75,
@@ -34,10 +34,10 @@ export default function Home() {
               options={{
                 strings: [
                   "DevOps Engineer",
-                  "Cloud Expert", 
-                  "AWS | GCP | Kubernetes",
-                  "Senior Risk Consultant at EY",
+                  "Cloud Architect", 
                   "Automation Enthusiast",
+                  "Senior Risk Consultant at EY",
+                  "GCP | Kubernetes Expert",
                 ],
                 autoStart: true,
                 loop: true,
@@ -53,16 +53,53 @@ export default function Home() {
             transition={{ delay: 2, duration: 1 }}
             className="tagline"
           >
-            Building reliable, scalable, and modern cloud solutions 🚀
+            Transforming businesses with cloud-native solutions & DevOps excellence 🚀
           </motion.p>
+          
+          <motion.div
+            className="hero-cta-buttons"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3, duration: 1 }}
+          >
+            <Link to="/projects" className="btn primary glow">
+              <i className="fas fa-rocket"></i>
+              View My Projects
+            </Link>
+            <a href="mailto:medidajeevanreddy499@gmail.com?subject=Let's Work Together&body=Hi Jeevan, I'm interested in discussing opportunities." className="btn secondary glow">
+              <i className="fas fa-handshake"></i>
+              Hire Me
+            </a>
+          </motion.div>
+          
+          <motion.div
+            className="social-media-icons"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 4, duration: 1 }}
+          >
+            <a href="https://www.linkedin.com/in/medida-jeevan-reddy-2673aa176/" target="_blank" rel="noopener noreferrer" className="social-icon">
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/jeevanrobin" target="_blank" rel="noopener noreferrer" className="social-icon">
+              <i className="fab fa-github"></i>
+            </a>
+            <a href="mailto:medidajeevanreddy499@gmail.com" className="social-icon">
+              <i className="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+918309823797" className="social-icon">
+              <i className="fas fa-phone"></i>
+            </a>
+          </motion.div>
         </div>
 
         <motion.div
           className="home-right"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2.5, duration: 1 }}
+          transition={{ delay: 4, duration: 1 }}
         >
+
           <div className="navigation-cards">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
