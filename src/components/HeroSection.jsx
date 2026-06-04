@@ -33,8 +33,8 @@ export default function HeroSection() {
         backgroundImage:"linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)",
         backgroundSize:"60px 60px", pointerEvents:"none" }} />
 
-      {/* Content */}
-      <div style={{ position:"relative", zIndex:10, textAlign:"center", padding:"0 1.5rem", maxWidth:"56rem", margin:"0 auto", paddingTop:"6rem" }}>
+      {/* Content — paddingBottom keeps CTAs clear of SCROLL indicator */}
+      <div style={{ position:"relative", zIndex:10, textAlign:"center", padding:"6rem 1.5rem 7rem", maxWidth:"56rem", margin:"0 auto" }}>
         <p className="blur-in" style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.45)", textTransform:"uppercase", letterSpacing:"0.35em", marginBottom:"2rem" }}>
           GCP DevOps Engineer · Hyderabad, India
         </p>
@@ -50,8 +50,8 @@ export default function HeroSection() {
               style={{ fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", display:"inline-block" }}
               initial={{ y:10, opacity:0, filter:"blur(4px)" }}
               animate={{ y:0,  opacity:1, filter:"blur(0px)" }}
-              exit={{ y:-10,   opacity:0, filter:"blur(4px)" }}
-              transition={{ duration:0.35 }}>
+              exit={{ y:-6, opacity:0, filter:"blur(2px)" }}
+              transition={{ duration:0.18 }}>
               {roles[roleIndex]}
             </motion.span>
           </AnimatePresence>{" "}

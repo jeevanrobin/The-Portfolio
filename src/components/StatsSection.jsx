@@ -9,7 +9,7 @@ function CountUp({ target, suffix="", duration=2000 }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting){setStarted(true);obs.disconnect();} }, { threshold:0.5 });
+    const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting){setStarted(true);obs.disconnect();} }, { threshold:0.1 });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);

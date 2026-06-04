@@ -79,3 +79,8 @@ nav { will-change: box-shadow; transform: translateZ(0); }
 
 /* GSAP marquee */
 @keyframes marqueeAnim { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* Offset anchor scroll so navbar doesn't cover section headings */
+section[id] {
+  scroll-margin-top: 80px;
+}
