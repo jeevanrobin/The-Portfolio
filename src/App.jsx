@@ -1,111 +1,59 @@
-import React from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Particles from 'react-tsparticles';
-import Home from './pages/Home';
-import About from './pages/About';
-import Skills from './pages/Skills';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import './App.css';
+import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import Lenis from "@studio-freight/lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LoadingScreen from "./components/LoadingScreen";
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import SelectedWorks from "./components/SelectedWorks";
+import JournalSection from "./components/JournalSection";
+import ExplorationsSection from "./components/ExplorationsSection";
+import StatsSection from "./components/StatsSection";
+import AboutSection from "./components/AboutSection";
+import SkillsSection from "./components/SkillsSection";
+import ExperienceSection from "./components/ExperienceSection";
+import ContactSection from "./components/ContactSection";
 
-function App() {
-  const location = useLocation();
+gsap.registerPlugin(ScrollTrigger);
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLoading) return;
+    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+    };
+  }, [isLoading]);
 
   return (
-    <div className="App">
-      {/* Background Elements */}
-      <div className="floating-icons">
-        <div className="floating-icon">⚙️</div>
-        <div className="floating-icon">🐳</div>
-        <div className="floating-icon">☁️</div>
-        <div className="floating-icon">🔧</div>
-        <div className="floating-icon">📊</div>
-        <div className="floating-icon">🚀</div>
-      </div>
-
-      <Particles
-        className="particles"
-        options={{
-          background: { color: { value: "transparent" } },
-          fpsLimit: 60,
-          particles: {
-            number: {
-              value: 10,
-              density: { enable: false }
-            },
-            move: {
-              enable: true,
-              speed: 2,
-              direction: "none",
-              outModes: {
-                default: "bounce"
-              }
-            },
-            shape: {
-              type: "images",
-              images: [
-                { src: "/icons/github.png", width: 20, height: 20 },
-                { src: "/icons/mail.png", width: 20, height: 20 },
-                { src: "/icons/linkedin.png", width: 20, height: 20 },
-                { src: "/icons/phone.png", width: 20, height: 20 }
-              ]
-            },
-            size: {
-              value: 30,
-              random: false
-            },
-            opacity: {
-              value: 0.8
-            }
-          },
-          emitters: {
-            direction: "none",
-            rate: { quantity: 2, delay: 0.5 },
-            position: { x: 0, y: 50 },
-            size: { width: 100, height: 0 }
-          },
-          detectRetina: true
-        }}
-      />
-
-      {/* Navigation */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <Link to="/" className="nav-logo">JR</Link>
-          
-          <div className="nav-menu">
-            <Link to="/" className={location.pathname === '/' ? 'nav-link active' : 'nav-link'}>
-              Home
-            </Link>
-            <Link to="/about" className={location.pathname === '/about' ? 'nav-link active' : 'nav-link'}>
-              About
-            </Link>
-            <Link to="/skills" className={location.pathname === '/skills' ? 'nav-link active' : 'nav-link'}>
-              Skills
-            </Link>
-            <Link to="/experience" className={location.pathname === '/experience' ? 'nav-link active' : 'nav-link'}>
-              Experience
-            </Link>
-            <Link to="/contact" className={location.pathname === '/contact' ? 'nav-link active' : 'nav-link'}>
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Page Routes with Animations */}
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experience" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
-    </div>
+      {!isLoading && (
+        <>
+          <Navbar />
+          <main>
+            <HeroSection />
+            <SelectedWorks />
+            <JournalSection />
+            <ExplorationsSection />
+            <StatsSection />
+            <AboutSection />
+            <SkillsSection />
+            <ExperienceSection />
+            <ContactSection />
+          </main>
+        </>
+      )}
+    </>
   );
 }
-
-export default App;
