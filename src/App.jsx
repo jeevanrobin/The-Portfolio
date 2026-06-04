@@ -22,11 +22,23 @@ export default function App() {
 
   useEffect(() => {
     if (isLoading) return;
-    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    // Connect Lenis to GSAP ScrollTrigger
+
+    const lenis = new Lenis({
+      duration: 1.0,           // slightly faster response
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,      // don't amplify wheel
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    // Wire Lenis to GSAP ticker (single RAF loop)
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+
     return () => {
       lenis.destroy();
       gsap.ticker.remove((time) => lenis.raf(time * 1000));

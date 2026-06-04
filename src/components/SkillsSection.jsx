@@ -30,7 +30,7 @@ export default function SkillsSection() {
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))", gap:"1rem" }}>
           {groups.map((g, i) => (
             <motion.div key={g.title} style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:"1rem", padding:"1.25rem" }}
-              initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:0.5, delay:i*0.05 }}>
+              initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:0.5, delay:i*0.03 }}>
               <h3 style={{ color:"#f5f5f5", fontSize:"0.85rem", fontWeight:500, marginBottom:"0.75rem" }}>{g.title}</h3>
               <div style={{ display:"flex", flexWrap:"wrap", gap:"0.375rem" }}>
                 {g.items.map(item => (

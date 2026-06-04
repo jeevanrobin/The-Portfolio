@@ -29,7 +29,7 @@ export default function ExperienceSection() {
         <div style={{ display:"flex", flexDirection:"column", gap:"1rem" }}>
           {exps.map((exp, i) => (
             <motion.div key={exp.company} style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:"1rem", padding:"2rem" }}
-              initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:0.6, delay:i*0.15 }}>
+              initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:0.6, delay:i*0.1 }}>
               <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"space-between", gap:"0.75rem", marginBottom:"1.25rem" }}>
                 <div>
                   <div style={{ display:"flex", alignItems:"center", gap:"0.5rem", marginBottom:"0.25rem" }}>

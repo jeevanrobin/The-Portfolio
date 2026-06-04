@@ -6,3 +6,20 @@ body { background: #0a0a0a; color: #f5f5f5; font-family: 'Inter', sans-serif; ov
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* GPU acceleration for animated elements */
+.name-reveal,
+.blur-in {
+  will-change: opacity, transform, filter;
+}
+
+/* Prevent layout recalc during scroll on fixed elements */
+nav {
+  will-change: box-shadow;
+  transform: translateZ(0);
+}
+
+/* Smooth scroll for anchor clicks (fallback) */
+html {
+  scroll-behavior: smooth;
+}
