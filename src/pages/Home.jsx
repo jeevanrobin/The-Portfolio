@@ -3,14 +3,21 @@ import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 
 export default function Home() {
+  const stats = [
+    { value: "8+", label: "Years Experience" },
+    { value: "3", label: "Companies" },
+    { value: "GCP", label: "Cloud Expert" },
+    { value: "SRE", label: "@ EY LLP" },
+  ];
+
   return (
     <section className="home">
       <div className="home-content">
         <div className="home-left">
           <motion.h1
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.5 }}
           >
             <Typewriter
               options={{
@@ -27,17 +34,16 @@ export default function Home() {
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
             className="job-title"
           >
             <Typewriter
               options={{
                 strings: [
-                  "DevOps Engineer",
-                  "Cloud Architect", 
-                  "Automation Enthusiast",
-                  "Senior Risk Consultant at EY",
-                  "GCP | Kubernetes Expert",
+                  "GCP DevOps Engineer",
+                  "Site Reliability Engineer",
+                  "Cloud & Kubernetes Expert",
+                  "DevOps @ EY LLP (HSBC)",
                 ],
                 autoStart: true,
                 loop: true,
@@ -48,23 +54,38 @@ export default function Home() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             className="tagline"
           >
             Transforming businesses with cloud-native solutions & DevOps excellence 🚀
           </motion.p>
+
+          {/* Stats Row */}
+          <motion.div
+            className="stats-row"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            {stats.map((stat, i) => (
+              <div className="stat-item" key={i}>
+                <span className="stat-value">{stat.value}</span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
           
           <motion.div
             className="hero-cta-buttons"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 3, duration: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
           >
-            <Link to="/projects" className="btn primary glow">
-              <i className="fas fa-rocket"></i>
-              View My Projects
+            <Link to="/experience" className="btn primary glow">
+              <i className="fas fa-briefcase"></i>
+              View Experience
             </Link>
             <a href="mailto:medidajeevanreddy499@gmail.com?subject=Let's Work Together&body=Hi Jeevan, I'm interested in discussing opportunities." className="btn secondary glow">
               <i className="fas fa-handshake"></i>
@@ -74,9 +95,9 @@ export default function Home() {
           
           <motion.div
             className="social-media-icons"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4, duration: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
           >
             <a href="https://www.linkedin.com/in/medida-jeevan-reddy-2673aa176/" target="_blank" rel="noopener noreferrer" className="social-icon">
               <i className="fab fa-linkedin"></i>
@@ -95,63 +116,39 @@ export default function Home() {
 
         <motion.div
           className="home-right"
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 4, duration: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
         >
-
           <div className="navigation-cards">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 4.2, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link to="/about" className="nav-card">
-            <i className="fas fa-user"></i>
-            <h3>About</h3>
-            <p>Learn about my journey and experience</p>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 4.4, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link to="/skills" className="nav-card">
-            <i className="fas fa-cogs"></i>
-            <h3>Skills</h3>
-            <p>Explore my technical expertise</p>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 4.6, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link to="/projects" className="nav-card">
-            <i className="fas fa-rocket"></i>
-            <h3>Projects</h3>
-            <p>View my featured work and achievements</p>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 4.8, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link to="/contact" className="nav-card">
-            <i className="fas fa-envelope"></i>
-            <h3>Contact</h3>
-            <p>Get in touch for opportunities</p>
-          </Link>
-        </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.4 }} whileHover={{ scale: 1.05 }}>
+              <Link to="/about" className="nav-card">
+                <i className="fas fa-user"></i>
+                <h3>About</h3>
+                <p>My journey & background</p>
+              </Link>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.4 }} whileHover={{ scale: 1.05 }}>
+              <Link to="/skills" className="nav-card">
+                <i className="fas fa-cogs"></i>
+                <h3>Skills</h3>
+                <p>Technical expertise</p>
+              </Link>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.4 }} whileHover={{ scale: 1.05 }}>
+              <Link to="/experience" className="nav-card">
+                <i className="fas fa-briefcase"></i>
+                <h3>Experience</h3>
+                <p>Work history & projects</p>
+              </Link>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4 }} whileHover={{ scale: 1.05 }}>
+              <Link to="/contact" className="nav-card">
+                <i className="fas fa-envelope"></i>
+                <h3>Contact</h3>
+                <p>Get in touch</p>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

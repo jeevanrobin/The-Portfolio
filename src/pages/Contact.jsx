@@ -26,7 +26,7 @@ export default function Contact() {
     <motion.div
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.4 }}
       className="page"
     >
       <div className="contact">
@@ -41,7 +41,7 @@ export default function Contact() {
               className="contact-item"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
               whileHover={{ scale: 1.05 }}
             >
               <i className={item.icon}></i>

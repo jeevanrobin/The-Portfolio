@@ -3,16 +3,44 @@ import { motion } from "framer-motion";
 export default function Skills() {
   const skillCards = [
     {
-      title: "Google Cloud Platform",
-      skills: "Compute Engine, GKE, Cloud Storage, VPC, IAM, Pub/Sub, Cloud Functions, Cloud SQL, BigQuery, Cloud Load Balancing, Filestore, Cloud DNS, Secret Manager, Cloud Monitoring, Cloud Logging, KMS"
+      title: "☁️ Cloud Platform (GCP)",
+      skills: "Compute Engine, Cloud Storage, IAM, VPC Network, Cloud DNS, Load Balancer, Cloud Monitoring, Cloud Logging, Cloud Armor, Cloud Billing"
     },
     {
-      title: "DevOps & CI/CD Tools", 
-      skills: "Jenkins, Cloud Build, Git, GitHub, GitLab, Maven, SonarQube, Ansible, Shell Scripting, Python"
+      title: "🛠️ DevOps Tools",
+      skills: "Git, Jenkins, Ansible, Docker, Maven, SonarQube"
     },
     {
-      title: "Infrastructure & Monitoring",
-      skills: "Terraform, Deployment Manager, Docker, Kubernetes (GKE), Cloud Monitoring (Stackdriver), Prometheus, Grafana, Cloud Logging"
+      title: "🏗️ Infrastructure & IaC",
+      skills: "Terraform, Infrastructure as Code (IaC), Reusable Terraform Modules, GCP Infrastructure Provisioning"
+    },
+    {
+      title: "🐳 Containerization & Orchestration",
+      skills: "Docker, Kubernetes, GKE (Google Kubernetes Engine), Custom Dockerfiles, Container Management"
+    },
+    {
+      title: "⚙️ CI/CD & Automation",
+      skills: "Jenkins Pipelines, Git Webhooks, Deployment Automation, Release Management, Build Automation, Maven (WAR/JAR)"
+    },
+    {
+      title: "📊 Monitoring & Observability",
+      skills: "Cloud Monitoring, Cloud Logging, Grafana, Prometheus, Alerting, Incident Management"
+    },
+    {
+      title: "🔐 Cloud Security & Governance",
+      skills: "IAM Roles & Policies, Service Accounts, Cloud Armor, SSL Certificate Management, API Key Management"
+    },
+    {
+      title: "🖥️ Scripting & OS",
+      skills: "Shell Scripting, Python, Linux Server Administration, Windows"
+    },
+    {
+      title: "🚨 Production Support / SRE",
+      skills: "Incident Management, Root Cause Analysis, Troubleshooting, System Reliability, High Availability, SLA Management"
+    },
+    {
+      title: "📁 Source Control",
+      skills: "Git, GitHub, GitLab, Branching Strategies, Code Merging, Release Workflows"
     }
   ];
 
@@ -20,7 +48,7 @@ export default function Skills() {
     <motion.div
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className="page"
     >
       <div className="skills">
@@ -32,7 +60,7 @@ export default function Skills() {
               className="skill-card"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
             >
               <h3>{skill.title}</h3>
               <p>{skill.skills}</p>

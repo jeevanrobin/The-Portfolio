@@ -84,8 +84,8 @@ function App() {
             <Link to="/skills" className={location.pathname === '/skills' ? 'nav-link active' : 'nav-link'}>
               Skills
             </Link>
-            <Link to="/projects" className={location.pathname === '/projects' ? 'nav-link active' : 'nav-link'}>
-              Projects
+            <Link to="/experience" className={location.pathname === '/experience' ? 'nav-link active' : 'nav-link'}>
+              Experience
             </Link>
             <Link to="/contact" className={location.pathname === '/contact' ? 'nav-link active' : 'nav-link'}>
               Contact
@@ -100,7 +100,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
