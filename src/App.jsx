@@ -14,6 +14,9 @@ import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
+import AmbientBackground from "./components/AmbientBackground";
+import ScrollProgress from "./components/ScrollProgress";
+import CustomCursor from "./components/CustomCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,23 +25,17 @@ export default function App() {
 
   useEffect(() => {
     if (isLoading) return;
-
     const lenis = new Lenis({
-      duration: 1.0,           // slightly faster response
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
-      gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,      // don't amplify wheel
+      wheelMultiplier: 1,
       touchMultiplier: 2,
-      infinite: false,
     });
-
-    // Wire Lenis to GSAP ticker (single RAF loop)
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
-
     return () => {
       lenis.destroy();
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
@@ -52,8 +49,12 @@ export default function App() {
       </AnimatePresence>
       {!isLoading && (
         <>
+          {/* Global ambient layers */}
+          <AmbientBackground />
+          <ScrollProgress />
+          <CustomCursor />
           <Navbar />
-          <main>
+          <main style={{ position:"relative", zIndex:2 }}>
             <HeroSection />
             <SelectedWorks />
             <JournalSection />
