@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { gsap } from "gsap";
@@ -43,11 +44,7 @@ export default function ContactSection() {
         <div style={{ maxWidth:"56rem", margin:"0 auto", padding:"0 1.5rem" }} ref={ref}>
           <motion.div style={{ textAlign:"center", marginBottom:"4rem" }}
             initial={{ opacity:0, y:30 }} animate={inView?{opacity:1,y:0}:{}} transition={{ duration:0.8 }}>
-            <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"0.75rem", marginBottom:"1rem" }}>
-              <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-              <span style={{ fontSize:"0.7rem", color:"rgba(255,255,255,0.4)", textTransform:"uppercase", letterSpacing:"0.3em" }}>Contact</span>
-              <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-            </div>
+            <SectionDivider label="Contact" />
             <h2 style={{ fontSize:"clamp(3rem,9vw,6rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", marginBottom:"1rem", lineHeight:1 }}>
               Let's <em>connect</em>
             </h2>

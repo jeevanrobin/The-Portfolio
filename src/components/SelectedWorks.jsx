@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import { useState } from "react";
 import useReveal from "../hooks/useReveal";
 
@@ -53,10 +54,7 @@ export default function SelectedWorks() {
       <div style={{ maxWidth:"72rem", margin:"0 auto" }}>
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:"2.5rem", flexWrap:"wrap", gap:"1rem" }}>
           <div>
-            <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginBottom:"0.75rem" }}>
-              <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-              <span style={{ fontSize:"0.7rem", color:"#878787", textTransform:"uppercase", letterSpacing:"0.3em" }}>Selected Work</span>
-            </div>
+            <SectionDivider label="Selected Work" />
             <h2 style={{ fontSize:"clamp(2rem,5vw,3.5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", margin:0 }}>Featured <em>projects</em></h2>
             <p style={{ color:"#878787", fontSize:"0.85rem", marginTop:"0.5rem" }}>Cloud infrastructure & DevOps projects, from design to production.</p>
           </div>

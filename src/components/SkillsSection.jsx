@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import useReveal from "../hooks/useReveal";
 
 const groups = [
@@ -21,10 +22,7 @@ export default function SkillsSection() {
     <section id="skills" style={{ background:"#0a0a0a", padding:"6rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
       <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ marginBottom:"3rem" }}>
-          <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginBottom:"1rem" }}>
-            <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-            <span style={{ fontSize:"0.7rem", color:"#878787", textTransform:"uppercase", letterSpacing:"0.3em" }}>Technical Stack</span>
-          </div>
+          <SectionDivider label="Technical Stack" />
           <h2 style={{ fontSize:"clamp(2rem,5vw,3.5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5" }}>Skills & <em>Expertise</em></h2>
         </div>
 

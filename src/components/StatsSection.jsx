@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import { useRef, useEffect, useState } from "react";
 import useReveal from "../hooks/useReveal";
 

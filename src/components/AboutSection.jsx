@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import useReveal from "../hooks/useReveal";
 
 const exps = [
@@ -16,10 +17,7 @@ export default function AboutSection() {
       <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
 
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ marginBottom:"3rem" }}>
-          <div style={{ display:"flex", alignItems:"center", gap:"0.75rem", marginBottom:"1rem" }}>
-            <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-            <span style={{ fontSize:"0.7rem", color:"#878787", textTransform:"uppercase", letterSpacing:"0.3em" }}>About Me</span>
-          </div>
+          <SectionDivider label="About Me" />
           <h2 style={{ fontSize:"clamp(2rem,5vw,3.5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", marginBottom:"1rem" }}>Who I <em>am</em></h2>
           <p style={{ color:"#878787", fontSize:"0.95rem", maxWidth:"40rem", lineHeight:1.8 }}>
             Having <strong style={{color:"#f5f5f5"}}>8+ years of IT experience</strong> and <strong style={{color:"#f5f5f5"}}>6.5+ years as a DevOps/SRE</strong>, with expertise in GCP, Containerization, CI/CD, and Infrastructure Automation. Currently at <strong style={{color:"#89AACC"}}>EY LLP (Client: HSBC)</strong> ensuring production stability and system reliability.

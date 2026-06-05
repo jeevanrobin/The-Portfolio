@@ -1,3 +1,4 @@
+import SectionDivider from "./SectionDivider";
 import useReveal from "../hooks/useReveal";
 
 const col1 = [
@@ -35,11 +36,7 @@ export default function ExplorationsSection() {
     <section style={{ background:"#0a0a0a", padding:"8rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)", overflow:"hidden" }}>
       <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ textAlign:"center", marginBottom:"4rem" }}>
-          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"0.75rem", marginBottom:"1rem" }}>
-            <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-            <span style={{ fontSize:"0.7rem", color:"#878787", textTransform:"uppercase", letterSpacing:"0.3em" }}>Explorations</span>
-            <div style={{ width:"2rem", height:"1px", background:"rgba(255,255,255,0.1)" }} />
-          </div>
+          <SectionDivider label="Explorations" />
           <h2 style={{ fontSize:"clamp(2.5rem,7vw,5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", marginBottom:"1rem" }}>Visual <em>playground</em></h2>
           <p style={{ color:"#878787", fontSize:"0.9rem", maxWidth:"24rem", margin:"0 auto 2rem", lineHeight:1.7 }}>Tools and technologies I work with daily in cloud engineering.</p>
           <a href="https://github.com/jeevanrobin" target="_blank" rel="noopener noreferrer"

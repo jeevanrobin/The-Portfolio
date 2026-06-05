@@ -5,6 +5,11 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LoadingScreen from "./components/LoadingScreen";
 import Navbar from "./components/Navbar";
+import AmbientBackground from "./components/AmbientBackground";
+import NetworkOverlay from "./components/NetworkOverlay";
+import SpotlightCursor from "./components/SpotlightCursor";
+import ScrollProgress from "./components/ScrollProgress";
+import CustomCursor from "./components/CustomCursor";
 import HeroSection from "./components/HeroSection";
 import SelectedWorks from "./components/SelectedWorks";
 import JournalSection from "./components/JournalSection";
@@ -14,9 +19,6 @@ import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
-import AmbientBackground from "./components/AmbientBackground";
-import ScrollProgress from "./components/ScrollProgress";
-import CustomCursor from "./components/CustomCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,12 +49,16 @@ export default function App() {
       <AnimatePresence>
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
+
       {!isLoading && (
         <>
-          {/* Global ambient layers */}
+          {/* Global ambient layers — z-index 0-2 */}
           <AmbientBackground />
+          <NetworkOverlay />
+          <SpotlightCursor />
           <ScrollProgress />
           <CustomCursor />
+
           <Navbar />
           <main style={{ position:"relative", zIndex:2 }}>
             <HeroSection />
