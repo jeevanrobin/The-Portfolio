@@ -26,7 +26,6 @@ export default function ScrollProgress() {
         boxShadow:"0 0 8px rgba(137,170,204,0.6)",
         animation:"gradientShift 3s ease infinite",
       }} />
-      <style>{`@keyframes gradientShift{0%{background-position:0%}100%{background-position:200%}}`}</style>
     </div>
   );
 }

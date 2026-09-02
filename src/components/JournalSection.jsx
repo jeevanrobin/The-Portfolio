@@ -13,7 +13,7 @@ export default function JournalSection() {
   const [listRef, listIn] = useReveal();
 
   return (
-    <section id="journal" style={{ background:"#0a0a0a", padding:"6rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
+    <section id="journal" style={{ background:"rgba(10,10,10,0.82)", padding:"6rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
       <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:"2.5rem", flexWrap:"wrap", gap:"1rem" }}>
           <div>

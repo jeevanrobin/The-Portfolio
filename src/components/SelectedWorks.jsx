@@ -1,75 +1,147 @@
-import SectionDivider from "./SectionDivider";
-import { useState } from "react";
 import useReveal from "../hooks/useReveal";
+import ProjectScrollStack from "./ProjectScrollStack";
+import SpotlightProjectCard from "./SpotlightProjectCard";
 
-const works = [
-  { title:"GCP Cloud Architecture",  subtitle:"EY LLP · HSBC",           tags:["Terraform","GCP","IAM"],            span:7, bg:"rgba(78,133,191,0.1)",   emoji:"☁️" },
-  { title:"CI/CD Pipeline Design",   subtitle:"HCL Tech",                 tags:["Jenkins","Git","Maven"],             span:5, bg:"rgba(137,170,204,0.08)", emoji:"⚙️" },
-  { title:"Kubernetes Orchestration",subtitle:"HCL Tech · GKE",           tags:["Docker","K8s","GKE"],                span:5, bg:"rgba(60,160,80,0.08)",   emoji:"🐳" },
-  { title:"Infrastructure as Code",  subtitle:"Smartried Technologies",   tags:["Terraform","Ansible","IaC"],         span:7, bg:"rgba(191,140,78,0.08)",  emoji:"🏗️" },
+const WORKS = [
+  {
+    id: "01",
+    title: "GCP Cloud Architecture",
+    desc: "Designed multi-region infrastructure with VPC peering, Cloud Armor WAF, and automated failover. 40% latency reduction.",
+    tags: ["GCP", "Terraform", "VPC", "Cloud Armor"],
+    span: 7,
+    year: "2024",
+    caseStudy: "/The-Portfolio/case-studies/gcp-cloud-architecture",
+  },
+  {
+    id: "02",
+    title: "CI/CD Pipeline Platform",
+    desc: "End-to-end delivery pipeline using Jenkins, ArgoCD, and GKE. Deploy-to-prod in under 8 minutes with full rollback.",
+    tags: ["Jenkins", "ArgoCD", "GKE", "Docker"],
+    span: 5,
+    year: "2023",
+    caseStudy: "/The-Portfolio/case-studies/cicd-pipeline-platform",
+  },
+  {
+    id: "03",
+    title: "Kubernetes Orchestration",
+    desc: "200+ microservices on GKE with HPA, PDB, and custom operators. 99.97% uptime SLA across 3 production clusters.",
+    tags: ["Kubernetes", "Helm", "Prometheus"],
+    span: 5,
+    year: "2023",
+    caseStudy: "/The-Portfolio/case-studies/kubernetes-orchestration",
+  },
+  {
+    id: "04",
+    title: "Infrastructure as Code",
+    desc: "Full-stack IaC with Terraform modules, Ansible playbooks, and GitOps. 100% reproducible across dev/staging/prod.",
+    tags: ["Terraform", "Ansible", "GitOps"],
+    span: 7,
+    year: "2022",
+  },
 ];
 
-function BentoCard({ w }) {
-  const [hovered, setHovered] = useState(false);
+const SYSTEMS = {
+  "01": {
+    labels: ["Terraform", "Multi-region", "VPC peering", "Cloud Armor", "Failover"],
+    lines: [[18, 50, 42, 28], [18, 50, 42, 72], [42, 28, 74, 28], [42, 72, 74, 72]],
+    nodes: [[18, 50], [42, 28], [42, 72], [74, 28], [74, 72]],
+  },
+  "02": {
+    labels: ["Jenkins", "Docker", "ArgoCD", "GKE", "Production", "Rollback"],
+    lines: [[14, 50, 38, 28], [14, 50, 38, 72], [38, 28, 68, 50], [38, 72, 68, 50], [68, 50, 88, 28], [68, 50, 88, 72]],
+    nodes: [[14, 50], [38, 28], [38, 72], [68, 50], [88, 28], [88, 72]],
+  },
+  "03": {
+    labels: ["GKE", "Services", "HPA", "PDB", "Helm", "Prometheus"],
+    lines: [[18, 50, 42, 28], [18, 50, 42, 72], [42, 28, 72, 28], [42, 72, 72, 72], [72, 28, 88, 50], [72, 72, 88, 50]],
+    nodes: [[18, 50], [42, 28], [42, 72], [72, 28], [72, 72], [88, 50]],
+  },
+  "04": {
+    labels: ["Terraform", "Ansible", "GitOps", "Dev", "Staging", "Prod"],
+    lines: [[16, 50, 40, 28], [16, 50, 40, 72], [40, 28, 72, 28], [40, 72, 72, 72], [72, 28, 88, 50], [72, 72, 88, 50]],
+    nodes: [[16, 50], [40, 28], [40, 72], [72, 28], [72, 72], [88, 50]],
+  },
+};
+
+function SystemVisual({ id }) {
+  const system = SYSTEMS[id];
   return (
-    <div style={{
-      gridColumn:`span ${w.span}`, height:"220px",
-      background:`rgba(255,255,255,0.03)`,
-      border:`1px solid ${hovered?"rgba(137,170,204,0.4)":"rgba(255,255,255,0.08)"}`,
-      borderRadius:"1.25rem", overflow:"hidden", position:"relative", transition:"border-color 0.3s",
-    }}
-    onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
-      {/* Gradient bg */}
-      <div style={{ position:"absolute", inset:0, background:`radial-gradient(ellipse at 30% 50%, ${w.bg}, transparent 70%)`, transition:"opacity 0.4s", opacity:hovered?1.5:1 }} />
-      {/* Dot grid */}
-      <div style={{ position:"absolute", inset:0, opacity:0.04, backgroundImage:"radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize:"20px 20px" }} />
-      {/* Emoji */}
-      <div style={{ position:"absolute", right:"1.5rem", top:"50%", transform:`translateY(-50%) scale(${hovered?1.15:1}) rotate(${hovered?"8deg":"0deg"})`, fontSize:"4rem", opacity:hovered?0.3:0.1, transition:"all 0.4s ease", userSelect:"none" }}>
-        {w.emoji}
-      </div>
-      {/* Hover blur overlay */}
-      <div style={{ position:"absolute", inset:0, background:"rgba(8,8,8,0.8)", backdropFilter:"blur(10px)", display:"flex", alignItems:"center", justifyContent:"center", opacity:hovered?1:0, transition:"opacity 0.3s" }}>
-        <span style={{ background:"rgba(245,245,245,0.9)", color:"#0a0a0a", padding:"0.45rem 1.1rem", borderRadius:"9999px", fontSize:"0.825rem", fontWeight:500 }}>
-          View — <em style={{ fontFamily:"serif" }}>{w.title}</em>
-        </span>
-      </div>
-      {/* Content */}
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"1.25rem 1.5rem" }}>
-        <div style={{ display:"flex", gap:"0.35rem", marginBottom:"0.6rem", flexWrap:"wrap" }}>
-          {w.tags.map(t=><span key={t} style={{ fontSize:"0.65rem", color:"#878787", background:"rgba(0,0,0,0.5)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:"9999px", padding:"0.15rem 0.55rem" }}>{t}</span>)}
-        </div>
-        <h3 style={{ color:"#f5f5f5", fontWeight:600, fontSize:"1.05rem", margin:"0 0 0.2rem" }}>{w.title}</h3>
-        <p style={{ color:"#878787", fontSize:"0.75rem", margin:0 }}>{w.subtitle}</p>
+    <div className="project-system-visual" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="presentation">
+        {system.lines.map((line, index) => <line key={index} x1={line[0]} y1={line[1]} x2={line[2]} y2={line[3]} />)}
+        {system.nodes.map(([x, y], index) => <circle key={index} cx={x} cy={y} r="2.2" />)}
+      </svg>
+      <div className="project-system-labels">
+        {system.labels.map(label => <span key={label}>{label}</span>)}
       </div>
     </div>
   );
 }
 
-export default function SelectedWorks() {
-  const [headRef, headIn] = useReveal();
-  const [gridRef, gridIn] = useReveal();
-
+function WorkCard({ work }) {
+  const [ref, revealed] = useReveal();
   return (
-    <section id="works" style={{ background:"#0a0a0a", padding:"6rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
-      <div style={{ maxWidth:"72rem", margin:"0 auto" }}>
-        <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", marginBottom:"2.5rem", flexWrap:"wrap", gap:"1rem" }}>
-          <div>
-            <SectionDivider label="Selected Work" />
-            <h2 style={{ fontSize:"clamp(2rem,5vw,3.5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5", margin:0 }}>Featured <em>projects</em></h2>
-            <p style={{ color:"#878787", fontSize:"0.85rem", marginTop:"0.5rem" }}>Cloud infrastructure & DevOps projects, from design to production.</p>
-          </div>
-          <a href="#experience" onClick={e=>{e.preventDefault();document.getElementById("experience")?.scrollIntoView({behavior:"smooth"})}}
-            style={{ fontSize:"0.8rem", color:"#878787", textDecoration:"none", borderRadius:"9999px", border:"1px solid rgba(255,255,255,0.1)", padding:"0.5rem 1rem", whiteSpace:"nowrap" }}>
-            View all work →
-          </a>
-        </div>
+    <SpotlightProjectCard
+      className={`project-stack-card reveal-scale${revealed ? " is-revealed" : ""}`}
+      ref={ref}
+      href={work.caseStudy}
+    >
+      <div className="project-card-grid" aria-hidden="true" />
+      <div className="project-card-index" aria-hidden="true">{work.id}</div>
+      <div className="project-card-topline">
+        <span>SYS / PROJECT {work.id}</span>
+        <span>{work.year}</span>
+      </div>
 
-        <div ref={gridRef} className={`reveal-stagger ${gridIn?"is-revealed":""}`}
-          style={{ display:"grid", gridTemplateColumns:"repeat(12,1fr)", gap:"1rem" }}>
-          {works.map(w => <BentoCard key={w.title} w={w} />)}
+      <div className="project-card-content">
+        <p className="project-card-kicker">Infrastructure narrative</p>
+        <h3>{work.title}</h3>
+        <p className="project-card-description">{work.desc}</p>
+      </div>
+
+      <SystemVisual id={work.id} />
+
+      <div className="project-card-footer">
+        <span className="project-card-status"><i /> Operational scope</span>
+        {work.caseStudy && <span className="project-card-link-label">View case study ↗</span>}
+        <div className="project-card-tags">
+        {work.tags.map(t => <span key={t} className="tag">{t}</span>)}
         </div>
       </div>
-      <style>{`@media(max-width:768px){[style*="grid-column: span 7"],[style*="grid-column: span 5"]{grid-column:span 12!important}}`}</style>
+    </SpotlightProjectCard>
+  );
+}
+
+export default function SelectedWorks() {
+  const [headRef, headRevealed] = useReveal();
+
+  return (
+    <section id="works" className="works-section">
+      <div className="works-heading container">
+
+        {/* Header */}
+         <div
+          ref={headRef}
+          className={`reveal${headRevealed ? " is-revealed" : ""}`}
+          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "3.5rem", flexWrap: "wrap", gap: "1.5rem" }}
+         >
+          <div>
+            <p className="section-label" style={{ marginBottom: "0.75rem" }}>Selected work</p>
+            <h2 className="section-title">
+              Projects that matter
+            </h2>
+          </div>
+          <p style={{ fontSize: "0.83rem", color: "var(--ink-muted)", maxWidth: "34ch", lineHeight: 1.75 }}>
+            Infrastructure and automation work across enterprise SaaS and cloud-native platforms.
+          </p>
+        </div>
+
+        </div>
+        <div className="works-stage">
+          <ProjectScrollStack>
+            {WORKS.map(w => <WorkCard key={w.id} work={w} />)}
+          </ProjectScrollStack>
+        </div>
     </section>
   );
 }

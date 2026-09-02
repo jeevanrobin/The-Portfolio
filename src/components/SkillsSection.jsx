@@ -1,48 +1,89 @@
-import SectionDivider from "./SectionDivider";
+import { useState } from "react";
 import useReveal from "../hooks/useReveal";
 
-const groups = [
-  { title:"☁️ Cloud Platform", items:["Compute Engine","Cloud Storage","IAM","VPC","Cloud DNS","Load Balancer","Cloud Armor","Cloud Billing"] },
-  { title:"🛠️ DevOps Tools",   items:["Git","Jenkins","Ansible","Docker","Maven","SonarQube"] },
-  { title:"🏗️ Infrastructure", items:["Terraform","IaC","Reusable Modules","GCP Provisioning"] },
-  { title:"🐳 Containers",     items:["Docker","Kubernetes","GKE","Dockerfiles"] },
-  { title:"⚙️ CI/CD",          items:["Jenkins Pipelines","Git Webhooks","Deploy Automation","Release Mgmt"] },
-  { title:"📊 Monitoring",     items:["Cloud Monitoring","Cloud Logging","Grafana","Prometheus"] },
-  { title:"🔐 Security",       items:["IAM Roles","Service Accounts","Cloud Armor","SSL Certs"] },
-  { title:"🖥️ Scripting",      items:["Shell Scripting","Python","Linux Admin","Windows"] },
-  { title:"🚨 SRE",            items:["Incident Mgmt","Root Cause Analysis","High Availability"] },
-  { title:"📁 Source Control", items:["Git","GitHub","GitLab","Branching"] },
+const SKILL_GROUPS = [
+  { label: "Cloud Platform",   skills: ["GCP", "Compute Engine", "Cloud Run", "GKE", "BigQuery", "Cloud SQL", "Pub/Sub", "Cloud Armor"] },
+  { label: "Infrastructure",   skills: ["Terraform", "Ansible", "Pulumi", "Packer", "CloudFormation"] },
+  { label: "Containers",       skills: ["Docker", "Kubernetes", "Helm", "Istio", "Containerd"] },
+  { label: "CI/CD",            skills: ["Jenkins", "ArgoCD", "GitLab CI", "GitHub Actions", "Spinnaker"] },
+  { label: "Observability",    skills: ["Prometheus", "Grafana", "Cloud Monitoring", "PagerDuty", "Jaeger", "Loki"] },
+  { label: "Networking",       skills: ["VPC", "Load Balancing", "Cloud DNS", "IAP", "Firewall Rules"] },
+  { label: "Security",         skills: ["IAM", "Secret Manager", "Vault", "Trivy", "OPA", "SAST"] },
+  { label: "Scripting",        skills: ["Bash", "Python", "Go", "YAML", "HCL"] },
 ];
 
+function SkillCard({ group, index }) {
+  const [ref, revealed] = useReveal();
+  return (
+    <div
+      ref={ref}
+      className={`skill-card reveal${revealed ? " is-revealed" : ""}`}
+      style={{
+        padding: "1.75rem",
+        background: "var(--bg-raised)",
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-md)",
+        transitionDelay: `${index * 0.045}s`,
+        transition: "border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out)",
+      }}
+      tabIndex="0"
+    >
+      <p style={{
+        fontSize: "0.65rem",
+        fontFamily: "'JetBrains Mono', monospace",
+        color: "var(--ink-dim)",
+        textTransform: "uppercase",
+        letterSpacing: "0.12em",
+        marginBottom: "1.1rem",
+      }}>
+        {group.label}
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+        {group.skills.map(s => (
+          <span key={s} className="tag">{s}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function SkillsSection() {
-  const [headRef, headIn] = useReveal();
-  const [gridRef, gridIn] = useReveal();
+  const [headRef, headRevealed] = useReveal();
+  const [activeGroup, setActiveGroup] = useState(null);
 
   return (
-    <section id="skills" style={{ background:"#0a0a0a", padding:"6rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)" }}>
-      <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
-        <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ marginBottom:"3rem" }}>
-          <SectionDivider label="Technical Stack" />
-          <h2 style={{ fontSize:"clamp(2rem,5vw,3.5rem)", fontFamily:"serif", fontStyle:"italic", color:"#f5f5f5" }}>Skills & <em>Expertise</em></h2>
+    <section id="skills" style={{ padding: "var(--section-gap) 0", borderTop: "1px solid var(--border)" }}>
+      <div className="container">
+
+        <div
+          ref={headRef}
+          className={`reveal${headRevealed ? " is-revealed" : ""}`}
+          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "3.5rem", flexWrap: "wrap", gap: "1.5rem" }}
+        >
+          <div>
+            <p className="section-label" style={{ marginBottom: "0.75rem" }}>Technical skills</p>
+            <h2 className="display" style={{ fontSize: "clamp(2.2rem, 5vw, 3.75rem)", color: "var(--ink)" }}>
+              The full stack, ops side
+            </h2>
+          </div>
+          <p style={{ fontSize: "0.83rem", color: "var(--ink-muted)", maxWidth: "32ch", lineHeight: 1.75 }}>
+            8 categories across cloud, infrastructure, delivery, and reliability.
+          </p>
         </div>
 
-        <div ref={gridRef} className={`reveal-stagger ${gridIn?"is-revealed":""}`}
-          style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))", gap:"1rem" }}>
-          {groups.map((g) => (
-            <div key={g.title} style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:"1rem", padding:"1.25rem", transition:"border-color 0.3s" }}
-              onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(137,170,204,0.35)"}
-              onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(255,255,255,0.08)"}>
-              <h3 style={{ color:"#f5f5f5", fontSize:"0.85rem", fontWeight:500, marginBottom:"0.75rem" }}>{g.title}</h3>
-              <div style={{ display:"flex", flexWrap:"wrap", gap:"0.375rem" }}>
-                {g.items.map(item => (
-                  <span key={item} style={{ fontSize:"0.7rem", color:"#878787", background:"rgba(0,0,0,0.4)", border:"1px solid rgba(255,255,255,0.07)", borderRadius:"9999px", padding:"0.2rem 0.6rem", transition:"color 0.2s, border-color 0.2s" }}
-                    onMouseEnter={e=>{e.target.style.color="#f5f5f5";e.target.style.borderColor="rgba(137,170,204,0.4)"}}
-                    onMouseLeave={e=>{e.target.style.color="#878787";e.target.style.borderColor="rgba(255,255,255,0.07)"}}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+        <div
+          className="skills-grid"
+          data-active-group={activeGroup ?? ""}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "1rem",
+          }}
+        >
+          {SKILL_GROUPS.map((g, i) => (
+           <div key={g.label} onPointerEnter={() => setActiveGroup(g.label)} onFocus={() => setActiveGroup(g.label)} onPointerLeave={() => setActiveGroup(null)} onBlur={() => setActiveGroup(null)}>
+             <SkillCard group={g} index={i} />
+           </div>
           ))}
         </div>
       </div>

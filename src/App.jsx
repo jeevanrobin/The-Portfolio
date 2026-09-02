@@ -1,78 +1,75 @@
-import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import LoadingScreen from "./components/LoadingScreen";
 import Navbar from "./components/Navbar";
 import AmbientBackground from "./components/AmbientBackground";
 import NetworkOverlay from "./components/NetworkOverlay";
-import SpotlightCursor from "./components/SpotlightCursor";
 import ScrollProgress from "./components/ScrollProgress";
-import CustomCursor from "./components/CustomCursor";
 import HeroSection from "./components/HeroSection";
 import SelectedWorks from "./components/SelectedWorks";
-import JournalSection from "./components/JournalSection";
-import ExplorationsSection from "./components/ExplorationsSection";
 import StatsSection from "./components/StatsSection";
 import AboutSection from "./components/AboutSection";
+import HowIWork from "./components/HowIWork";
 import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 
-gsap.registerPlugin(ScrollTrigger);
+const GcpCloudArchitectureCaseStudy = lazy(() => import("./pages/GcpCloudArchitectureCaseStudy"));
+const CicdPipelinePlatformCaseStudy = lazy(() => import("./pages/CicdPipelinePlatformCaseStudy"));
+const KubernetesOrchestrationCaseStudy = lazy(() => import("./pages/KubernetesOrchestrationCaseStudy"));
+const CASE_STUDY_PATH = "/The-Portfolio/case-studies/gcp-cloud-architecture";
+const CICD_CASE_STUDY_PATH = "/The-Portfolio/case-studies/cicd-pipeline-platform";
+const KUBERNETES_CASE_STUDY_PATH = "/The-Portfolio/case-studies/kubernetes-orchestration";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [path] = useState(() => window.location.pathname.replace(/\/$/, "") || "/");
   useEffect(() => {
-    if (isLoading) return;
-    const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
-    };
-  }, [isLoading]);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return undefined;
+    gsap.defaults({ ease: "power3.out" });
+    return () => gsap.killTweensOf(".motion-target");
+  }, []);
+
+  if (path === CASE_STUDY_PATH || path === "/case-studies/gcp-cloud-architecture") {
+    return (
+      <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
+        <GcpCloudArchitectureCaseStudy />
+      </Suspense>
+    );
+  }
+
+  if (path === CICD_CASE_STUDY_PATH || path === "/case-studies/cicd-pipeline-platform") {
+    return (
+      <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
+        <CicdPipelinePlatformCaseStudy />
+      </Suspense>
+    );
+  }
+
+  if (path === KUBERNETES_CASE_STUDY_PATH || path === "/case-studies/kubernetes-orchestration") {
+    return (
+      <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
+        <KubernetesOrchestrationCaseStudy />
+      </Suspense>
+    );
+  }
 
   return (
     <>
-      <AnimatePresence>
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-
-      {!isLoading && (
-        <>
-          {/* Global ambient layers — z-index 0-2 */}
-          <AmbientBackground />
-          <NetworkOverlay />
-          <SpotlightCursor />
-          <ScrollProgress />
-          <CustomCursor />
-
-          <Navbar />
-          <main style={{ position:"relative", zIndex:2 }}>
-            <HeroSection />
-            <SelectedWorks />
-            <JournalSection />
-            <ExplorationsSection />
-            <StatsSection />
-            <AboutSection />
-            <SkillsSection />
-            <ExperienceSection />
-            <ContactSection />
-          </main>
-        </>
-      )}
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <AmbientBackground />
+      <NetworkOverlay />
+      <ScrollProgress />
+      <Navbar />
+      <main id="main-content" tabIndex="-1" style={{ position:"relative", zIndex:2 }}>
+        <HeroSection />
+        <SelectedWorks />
+        <StatsSection />
+        <AboutSection />
+        <HowIWork />
+        <SkillsSection />
+        <ExperienceSection />
+        <ContactSection />
+      </main>
     </>
   );
 }

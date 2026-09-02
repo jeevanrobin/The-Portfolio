@@ -12,7 +12,7 @@ const col2 = [
   { emoji:"🔐", label:"IAM Security", rotate:"2deg"  },
 ];
 
-function Card({ item, delay }) {
+function Card({ item }) {
   return (
     <div style={{
       background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)",
@@ -33,7 +33,7 @@ export default function ExplorationsSection() {
   const [headRef, headIn] = useReveal();
   const [gridRef, gridIn] = useReveal();
   return (
-    <section style={{ background:"#0a0a0a", padding:"8rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)", overflow:"hidden" }}>
+    <section id="explorations" style={{ background:"rgba(10,10,10,0.82)", padding:"8rem 1.5rem", borderTop:"1px solid rgba(255,255,255,0.05)", overflow:"hidden" }}>
       <div style={{ maxWidth:"56rem", margin:"0 auto" }}>
         <div ref={headRef} className={`reveal ${headIn?"is-revealed":""}`} style={{ textAlign:"center", marginBottom:"4rem" }}>
           <SectionDivider label="Explorations" />

@@ -1,30 +1,36 @@
 import { useEffect, useRef } from "react";
-import Hls from "hls.js";
+import useReducedMotion from "../hooks/useReducedMotion";
 
 const HLS_URL = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
 
 export default function VideoBackground({ flip = false, overlay = "rgba(0,0,0,0.3)" }) {
   const videoRef = useRef(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-    if (Hls.isSupported()) {
-      const hls = new Hls({ startLevel: -1, autoStartLoad: true });
-      hls.loadSource(HLS_URL);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
-      return () => hls.destroy();
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    if (!video || reducedMotion) return undefined;
+    let hls;
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = HLS_URL;
       video.play().catch(() => {});
+    } else {
+      import("hls.js").then(({ default: Hls }) => {
+        if (!video.isConnected || !Hls.isSupported()) return;
+        hls = new Hls({ startLevel: -1, autoStartLoad: true });
+        hls.loadSource(HLS_URL);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+      });
     }
-  }, []);
+    return () => hls?.destroy();
+  }, [reducedMotion]);
 
   return (
     <div style={{ position:"absolute", inset:0, overflow:"hidden" }}>
       <video
         ref={videoRef}
+        aria-hidden="true"
         autoPlay muted loop playsInline
         style={{
           position:"absolute", top:"50%", left:"50%",

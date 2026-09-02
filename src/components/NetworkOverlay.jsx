@@ -27,7 +27,7 @@ export default function NetworkOverlay() {
   ];
 
   return (
-    <div style={{ position:"fixed", inset:0, zIndex:0, pointerEvents:"none", overflow:"hidden" }}>
+    <div aria-hidden="true" style={{ position:"fixed", inset:0, zIndex:0, pointerEvents:"none", overflow:"hidden" }}>
       <svg width="100%" height="100%" style={{ opacity:0.045 }} preserveAspectRatio="none">
         <defs>
           <filter id="glow">
