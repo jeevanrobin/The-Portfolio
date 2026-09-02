@@ -21,7 +21,15 @@ const CICD_CASE_STUDY_PATH = "/The-Portfolio/case-studies/cicd-pipeline-platform
 const KUBERNETES_CASE_STUDY_PATH = "/The-Portfolio/case-studies/kubernetes-orchestration";
 
 export default function App() {
-  const [path] = useState(() => window.location.pathname.replace(/\/$/, "") || "/");
+  const [path] = useState(() => {
+    const query = window.location.search;
+    if (query && query.startsWith("?/")) {
+      const redirectedPath = query.slice(1).replace(/~and~/g, "&");
+      window.history.replaceState(null, null, "/The-Portfolio" + redirectedPath + window.location.hash);
+      return ("/The-Portfolio" + redirectedPath).replace(/\/$/, "");
+    }
+    return window.location.pathname.replace(/\/$/, "") || "/";
+  });
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return undefined;
