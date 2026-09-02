@@ -16,17 +16,17 @@ import ContactSection from "./components/ContactSection";
 const GcpCloudArchitectureCaseStudy = lazy(() => import("./pages/GcpCloudArchitectureCaseStudy"));
 const CicdPipelinePlatformCaseStudy = lazy(() => import("./pages/CicdPipelinePlatformCaseStudy"));
 const KubernetesOrchestrationCaseStudy = lazy(() => import("./pages/KubernetesOrchestrationCaseStudy"));
-const CASE_STUDY_PATH = "/The-Portfolio/case-studies/gcp-cloud-architecture";
-const CICD_CASE_STUDY_PATH = "/The-Portfolio/case-studies/cicd-pipeline-platform";
-const KUBERNETES_CASE_STUDY_PATH = "/The-Portfolio/case-studies/kubernetes-orchestration";
+const GCP_CASE_STUDY = "case-studies/gcp-cloud-architecture";
+const CICD_CASE_STUDY = "case-studies/cicd-pipeline-platform";
+const KUBERNETES_CASE_STUDY = "case-studies/kubernetes-orchestration";
 
 export default function App() {
   const [path] = useState(() => {
     const query = window.location.search;
     if (query && query.startsWith("?/")) {
       const redirectedPath = query.slice(1).replace(/~and~/g, "&");
-      window.history.replaceState(null, null, "/The-Portfolio" + redirectedPath + window.location.hash);
-      return ("/The-Portfolio" + redirectedPath).replace(/\/$/, "");
+      window.history.replaceState(null, null, redirectedPath + window.location.hash);
+      return redirectedPath.replace(/\/$/, "");
     }
     return window.location.pathname.replace(/\/$/, "") || "/";
   });
@@ -37,7 +37,7 @@ export default function App() {
     return () => gsap.killTweensOf(".motion-target");
   }, []);
 
-  if (path === CASE_STUDY_PATH || path === "/case-studies/gcp-cloud-architecture") {
+  if (path.includes(GCP_CASE_STUDY)) {
     return (
       <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
         <GcpCloudArchitectureCaseStudy />
@@ -45,7 +45,7 @@ export default function App() {
     );
   }
 
-  if (path === CICD_CASE_STUDY_PATH || path === "/case-studies/cicd-pipeline-platform") {
+  if (path.includes(CICD_CASE_STUDY)) {
     return (
       <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
         <CicdPipelinePlatformCaseStudy />
@@ -53,7 +53,7 @@ export default function App() {
     );
   }
 
-  if (path === KUBERNETES_CASE_STUDY_PATH || path === "/case-studies/kubernetes-orchestration") {
+  if (path.includes(KUBERNETES_CASE_STUDY)) {
     return (
       <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
         <KubernetesOrchestrationCaseStudy />

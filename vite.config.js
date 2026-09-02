@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/The-Portfolio/', // GitHub Pages base path
+  base: './', // Universal relative base path for Netlify, Vercel & GitHub Pages
 })
