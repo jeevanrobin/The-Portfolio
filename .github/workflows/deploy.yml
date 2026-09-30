@@ -21,12 +21,19 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Install, lint, test and build
+      - name: Install, lint and unit test
         run: |
           npm ci
           npm run lint
           npm test
-          npm run build:ghpages
+
+      - name: Browser tests (routing, accessibility, responsive)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e
+
+      - name: Build for GitHub Pages
+        run: npm run build:ghpages
 
       - name: Deploy to gh-pages
         if: github.event_name == 'push'

@@ -5,7 +5,7 @@ describe("paths", () => {
   it("prefixes the deploy base", () => {
     expect(withBase("/resume.pdf", "/The-Portfolio/")).toBe("/The-Portfolio/resume.pdf");
     expect(withBase("#works", "/")).toBe("/#works");
-    expect(caseStudyHref("gcp-cloud-architecture", "/The-Portfolio/")).toBe("/The-Portfolio/case-studies/gcp-cloud-architecture");
+    expect(caseStudyHref("cloud-armor-load-balancing", "/The-Portfolio/")).toBe("/The-Portfolio/case-studies/cloud-armor-load-balancing");
   });
 
   it("strips the deploy base from pathnames", () => {
@@ -17,7 +17,7 @@ describe("paths", () => {
   });
 
   it("matches only known case-study routes", () => {
-    expect(matchCaseStudy("/case-studies/cicd-pipeline-platform")).toBe("cicd-pipeline-platform");
+    expect(matchCaseStudy("/case-studies/cicd-release-pipeline")).toBe("cicd-release-pipeline");
     expect(matchCaseStudy("/case-studies/nope")).toBeNull();
     expect(matchCaseStudy("/")).toBeNull();
   });

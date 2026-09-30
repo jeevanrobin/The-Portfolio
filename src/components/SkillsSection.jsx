@@ -2,14 +2,14 @@ import { useState } from "react";
 import useReveal from "../hooks/useReveal";
 
 const SKILL_GROUPS = [
-  { label: "Cloud Platform",   skills: ["GCP", "Compute Engine", "Cloud Run", "GKE", "BigQuery", "Cloud SQL", "Pub/Sub", "Cloud Armor"] },
-  { label: "Infrastructure",   skills: ["Terraform", "Ansible", "Pulumi", "Packer", "CloudFormation"] },
-  { label: "Containers",       skills: ["Docker", "Kubernetes", "Helm", "Istio", "Containerd"] },
-  { label: "CI/CD",            skills: ["Jenkins", "ArgoCD", "GitLab CI", "GitHub Actions", "Spinnaker"] },
-  { label: "Observability",    skills: ["Prometheus", "Grafana", "Cloud Monitoring", "PagerDuty", "Jaeger", "Loki"] },
-  { label: "Networking",       skills: ["VPC", "Load Balancing", "Cloud DNS", "IAP", "Firewall Rules"] },
-  { label: "Security",         skills: ["IAM", "Secret Manager", "Vault", "Trivy", "OPA", "SAST"] },
-  { label: "Scripting",        skills: ["Bash", "Python", "Go", "YAML", "HCL"] },
+  { label: "Cloud Platform",   skills: ["GCP", "Compute Engine", "Managed Instance Groups", "VPC", "Cloud Load Balancing", "Cloud DNS", "Cloud Storage", "Cloud Scheduler"] },
+  { label: "Infrastructure & Automation", skills: ["Terraform", "Ansible", "Python", "Shell", "Control-M"] },
+  { label: "CI/CD & Release",  skills: ["Git", "GitHub", "GitLab", "Jenkins", "Maven", "Nexus", "SonarQube"] },
+  { label: "Containers",       skills: ["Docker", "Kubernetes", "GKE"] },
+  { label: "Observability",    skills: ["Cloud Monitoring", "Cloud Logging", "Grafana", "Prometheus", "Alerting"] },
+  { label: "Security & Compliance", skills: ["Cloud Armor WAF", "IAM least privilege", "Cloud KMS (CMEK)", "SSL/TLS", "Firewall policy", "Vulnerability management"] },
+  { label: "Reliability",      skills: ["High availability", "Disaster recovery", "Backup & restore", "Incident management", "RCA", "Runbooks", "Patch management", "Golden images"] },
+  { label: "Data, FinOps & ITSM", skills: ["BigQuery", "Cloud SQL", "Cloudability", "ServiceNow", "Jira", "Confluence"] },
 ];
 
 function SkillCard({ group, index }) {

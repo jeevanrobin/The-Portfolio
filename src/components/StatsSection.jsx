@@ -40,10 +40,10 @@ function CountUp({ target, suffix = "", duration = 1800 }) {
 }
 
 const STATS = [
-  { value: 8,  suffix: "+", label: "Years experience",  sub: "Cloud & DevOps engineering" },
-  { value: 50, suffix: "+", label: "Projects shipped",   sub: "From pipelines to full GCP architecture" },
-  { value: 3,  suffix: "",  label: "Enterprise clients", sub: "EY LLP · HCL Technologies · Smartried" },
-  { value: 99, suffix: ".9%", label: "Uptime target",   sub: "SRE-grade reliability SLOs" },
+  { value: 8, suffix: "+",   label: "Years in IT",       sub: "DevOps, SRE and cloud engineering" },
+  { value: 6, suffix: ".5+",  label: "Years on GCP",      sub: "Building, securing and running infrastructure" },
+  { value: 3, suffix: "",     label: "Employers",         sub: "EY LLP · HCL Technologies · Smartried" },
+  { value: 5, suffix: "",     label: "Environments run",  sub: "DEV · UAT · Pre-prod · Prod · DR" },
 ];
 
 export default function StatsSection() {

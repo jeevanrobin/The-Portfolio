@@ -17,7 +17,7 @@ describe("case studies", () => {
     for (const study of Object.values(CASE_STUDIES)) {
       const keys = study.sections.map(section => section.key);
       expect(new Set(keys).size).toBe(keys.length);
-      for (const section of study.sections.filter(s => s.type === "architecture" && s.nodes)) {
+      for (const section of study.sections.filter(s => s.type === "architecture")) {
         const ids = new Set(section.nodes.map(node => node.id));
         expect(ids.has(section.activeNode)).toBe(true);
         section.links.forEach(([a, b]) => { expect(ids.has(a) && ids.has(b)).toBe(true); });
