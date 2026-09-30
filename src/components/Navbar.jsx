@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useReducedMotion from "../hooks/useReducedMotion";
+import { withBase } from "../lib/paths";
 import useResumeAvailability from "../hooks/useResumeAvailability";
 
 const LINKS = [
@@ -19,7 +20,7 @@ export default function Navbar() {
   const wasMenuOpen = useRef(false);
   const reducedMotion = useReducedMotion();
   const resumeReady = useResumeAvailability();
-  const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
+  const resumeUrl = withBase("resume.pdf");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);

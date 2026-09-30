@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { withBase } from "../lib/paths";
 
 export default function useResumeAvailability() {
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
     let active = true;
-    fetch(`${import.meta.env.BASE_URL}resume.pdf`)
+    fetch(withBase("resume.pdf"))
       .then(res => {
         const type = res.headers.get("content-type") || "";
         if (active && res.ok && type.includes("application/pdf")) setAvailable(true);
