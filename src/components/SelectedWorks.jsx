@@ -1,3 +1,4 @@
+import { caseStudyHref } from "../lib/paths";
 import useReveal from "../hooks/useReveal";
 import ProjectScrollStack from "./ProjectScrollStack";
 import SpotlightProjectCard from "./SpotlightProjectCard";
@@ -10,7 +11,7 @@ const WORKS = [
     tags: ["GCP", "Terraform", "VPC", "Cloud Armor"],
     span: 7,
     year: "2024",
-    caseStudy: "/The-Portfolio/case-studies/gcp-cloud-architecture",
+    caseStudy: caseStudyHref("gcp-cloud-architecture"),
   },
   {
     id: "02",
@@ -19,7 +20,7 @@ const WORKS = [
     tags: ["Jenkins", "ArgoCD", "GKE", "Docker"],
     span: 5,
     year: "2023",
-    caseStudy: "/The-Portfolio/case-studies/cicd-pipeline-platform",
+    caseStudy: caseStudyHref("cicd-pipeline-platform"),
   },
   {
     id: "03",
@@ -28,7 +29,7 @@ const WORKS = [
     tags: ["Kubernetes", "Helm", "Prometheus"],
     span: 5,
     year: "2023",
-    caseStudy: "/The-Portfolio/case-studies/kubernetes-orchestration",
+    caseStudy: caseStudyHref("kubernetes-orchestration"),
   },
   {
     id: "04",
@@ -37,6 +38,7 @@ const WORKS = [
     tags: ["Terraform", "Ansible", "GitOps"],
     span: 7,
     year: "2022",
+    caseStudy: caseStudyHref("infrastructure-as-code"),
   },
 ];
 

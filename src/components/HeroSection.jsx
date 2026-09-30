@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import VideoBackground from "./VideoBackground";
 import useReducedMotion from "../hooks/useReducedMotion";
+import { withBase } from "../lib/paths";
 import useResumeAvailability from "../hooks/useResumeAvailability";
 
 const MAP_NODES = [
@@ -33,7 +34,7 @@ export default function HeroSection() {
   const heroRef = useRef(null);
   const reducedMotion = useReducedMotion();
   const resumeReady = useResumeAvailability();
-  const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
+  const resumeUrl = withBase("resume.pdf");
 
   useEffect(() => {
     if (reducedMotion) return undefined;

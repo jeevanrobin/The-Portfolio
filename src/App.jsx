@@ -12,24 +12,26 @@ import HowIWork from "./components/HowIWork";
 import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
+import { matchCaseStudy, stripBase, withBase } from "./lib/paths";
 
-const GcpCloudArchitectureCaseStudy = lazy(() => import("./pages/GcpCloudArchitectureCaseStudy"));
-const CicdPipelinePlatformCaseStudy = lazy(() => import("./pages/CicdPipelinePlatformCaseStudy"));
-const KubernetesOrchestrationCaseStudy = lazy(() => import("./pages/KubernetesOrchestrationCaseStudy"));
-const GCP_CASE_STUDY = "case-studies/gcp-cloud-architecture";
-const CICD_CASE_STUDY = "case-studies/cicd-pipeline-platform";
-const KUBERNETES_CASE_STUDY = "case-studies/kubernetes-orchestration";
+const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
+
+// Resolve the current route. public/404.html bounces deep links on GitHub Pages
+// to "<base>?/case-studies/<slug>"; restore the real URL before rendering.
+function getInitialRoute() {
+  const { search, pathname, hash } = window.location;
+  if (search.startsWith("?/")) {
+    const redirected = search.slice(1).replace(/~and~/g, "&");
+    window.history.replaceState(null, "", withBase(redirected) + hash);
+    return stripBase(withBase(redirected));
+  }
+  return stripBase(pathname);
+}
 
 export default function App() {
-  const [path] = useState(() => {
-    const query = window.location.search;
-    if (query && query.startsWith("?/")) {
-      const redirectedPath = query.slice(1).replace(/~and~/g, "&");
-      window.history.replaceState(null, null, redirectedPath + window.location.hash);
-      return redirectedPath.replace(/\/$/, "");
-    }
-    return window.location.pathname.replace(/\/$/, "") || "/";
-  });
+  const [route] = useState(getInitialRoute);
+  const caseStudySlug = matchCaseStudy(route);
+
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return undefined;
@@ -37,26 +39,10 @@ export default function App() {
     return () => gsap.killTweensOf(".motion-target");
   }, []);
 
-  if (path.includes(GCP_CASE_STUDY)) {
+  if (caseStudySlug) {
     return (
       <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
-        <GcpCloudArchitectureCaseStudy />
-      </Suspense>
-    );
-  }
-
-  if (path.includes(CICD_CASE_STUDY)) {
-    return (
-      <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
-        <CicdPipelinePlatformCaseStudy />
-      </Suspense>
-    );
-  }
-
-  if (path.includes(KUBERNETES_CASE_STUDY)) {
-    return (
-      <Suspense fallback={<div className="case-study-loading" role="status">Loading case study…</div>}>
-        <KubernetesOrchestrationCaseStudy />
+        <CaseStudyPage slug={caseStudySlug} />
       </Suspense>
     );
   }

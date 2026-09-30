@@ -3,27 +3,48 @@ import useReducedMotion from "../hooks/useReducedMotion";
 
 const HLS_URL = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
 
+// Skip the decorative video when the user asked to save data or is on a slow connection.
+function shouldSkipVideo() {
+  const connection = navigator.connection;
+  return Boolean(connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || "")));
+}
+
 export default function VideoBackground({ flip = false, overlay = "rgba(0,0,0,0.3)" }) {
   const videoRef = useRef(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || reducedMotion) return undefined;
+    if (!video || reducedMotion || shouldSkipVideo()) return undefined;
     let hls;
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = HLS_URL;
-      video.play().catch(() => {});
-    } else {
+    let cancelled = false;
+
+    const start = () => {
+      if (cancelled) return;
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = HLS_URL;
+        video.play().catch(() => {});
+        return;
+      }
       import("hls.js").then(({ default: Hls }) => {
-        if (!video.isConnected || !Hls.isSupported()) return;
+        if (cancelled || !video.isConnected || !Hls.isSupported()) return;
         hls = new Hls({ startLevel: -1, autoStartLoad: true });
         hls.loadSource(HLS_URL);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
       });
-    }
-    return () => hls?.destroy();
+    };
+
+    // Keep the video stream and hls.js off the critical path: wait for the page to load.
+    const schedule = () => ("requestIdleCallback" in window ? window.requestIdleCallback(start, { timeout: 3000 }) : window.setTimeout(start, 500));
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", schedule);
+      hls?.destroy();
+    };
   }, [reducedMotion]);
 
   return (
