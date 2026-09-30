@@ -6,12 +6,12 @@ import { withBase } from "../lib/paths";
 import useResumeAvailability from "../hooks/useResumeAvailability";
 
 const MAP_NODES = [
-  { id: "gcp", label: "GCP", x: 110, y: 22 },
-  { id: "k8s", label: "Kubernetes · GKE", x: 110, y: 78, core: true },
-  { id: "vpc", label: "VPC", x: 52, y: 132 },
-  { id: "cicd", label: "CI/CD", x: 168, y: 132 },
+  { id: "gcp", label: "Terraform · IaC", x: 110, y: 22 },
+  { id: "k8s", label: "GCP Platform", x: 110, y: 78, core: true },
+  { id: "vpc", label: "VPC · HTTPS LB", x: 52, y: 132 },
+  { id: "cicd", label: "Jenkins CI/CD", x: 168, y: 132 },
   { id: "armor", label: "Cloud Armor", x: 52, y: 186 },
-  { id: "sre", label: "SRE · Reliability", x: 110, y: 232 },
+  { id: "sre", label: "SRE · DR", x: 110, y: 232 },
 ];
 
 const MAP_LINES = [
@@ -25,8 +25,8 @@ const MAP_LINES = [
 
 const STATS = [
   { val: "8+", label: "Years in IT" },
-  { val: "50+", label: "Projects" },
-  { val: "GCP", label: "Certified" },
+  { val: "6.5+", label: "Years on GCP" },
+  { val: "5", label: "Environments run" },
   { val: "SRE", label: "@ EY LLP" },
 ];
 
@@ -47,7 +47,6 @@ export default function HeroSection() {
         .fromTo(".hero-recruiter", { opacity: 0 }, { opacity: 1, duration: 0.4 }, "-=0.2")
         .fromTo(".hero-map-line", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, stagger: 0.08, ease: "power2.out" }, "-=0.6")
         .fromTo(".hero-map-node", { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.06 }, "-=0.75")
-        .fromTo(".hero-certification", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45 }, "-=0.4")
         .fromTo(".hero-stat", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.06 }, "-=0.5")
         .fromTo(".hero-scroll", { opacity: 0 }, { opacity: 1, duration: 0.4 }, "-=0.3");
     }, heroRef);
@@ -113,7 +112,7 @@ export default function HeroSection() {
               <div className="hero-intro">
                 <p className="hero-role">GCP DevOps &amp; SRE Engineer</p>
                 <p className="hero-lede">
-                  Building cloud-native infrastructure on GCP — Kubernetes platforms, CI/CD delivery, and SRE practices that keep production systems reliable at scale.
+                  Building, securing and running cloud infrastructure on Google Cloud — currently keeping a banking analytics platform reliable across DEV, UAT, pre-production, production and DR.
                 </p>
               </div>
 
@@ -157,12 +156,12 @@ export default function HeroSection() {
               </nav>
             </div>
 
-            {/* Right: platform map + certification */}
+            {/* Right: platform map */}
             <aside className="hero-side">
               <div className="hero-map" aria-hidden="true">
                 <div className="hero-map-header">
                   <span>Platform map</span>
-                  <span>Documented stack</span>
+                  <span>Conceptual</span>
                 </div>
                 <svg viewBox="0 0 220 250" role="presentation">
                   {MAP_LINES.map(([from, to]) => {
@@ -189,11 +188,6 @@ export default function HeroSection() {
                 </svg>
               </div>
 
-              <div className="hero-certification">
-                <span className="certification-mark" aria-hidden="true">G</span>
-                <strong>GCP Professional Cloud Architect</strong>
-                <span className="certification-meta">GCP certification</span>
-              </div>
             </aside>
           </div>
 

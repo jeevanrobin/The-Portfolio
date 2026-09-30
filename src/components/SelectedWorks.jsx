@@ -6,60 +6,60 @@ import SpotlightProjectCard from "./SpotlightProjectCard";
 const WORKS = [
   {
     id: "01",
-    title: "GCP Cloud Architecture",
-    desc: "Designed multi-region infrastructure with VPC peering, Cloud Armor WAF, and automated failover. 40% latency reduction.",
-    tags: ["GCP", "Terraform", "VPC", "Cloud Armor"],
+    title: "Cloud Armor & HTTPS Load Balancing",
+    desc: "Moved applications from TCP to HTTPS load balancers and rolled out Cloud Armor WAF policies with OWASP rules — preview first, then blocking — across DEV, UAT, pre-prod and production.",
+    tags: ["GCP", "Cloud Armor", "HTTPS LB", "Cloud DNS"],
     span: 7,
-    year: "2024",
-    caseStudy: caseStudyHref("gcp-cloud-architecture"),
+    year: "2024 –",
+    caseStudy: caseStudyHref("cloud-armor-load-balancing"),
   },
   {
     id: "02",
-    title: "CI/CD Pipeline Platform",
-    desc: "End-to-end delivery pipeline using Jenkins, ArgoCD, and GKE. Deploy-to-prod in under 8 minutes with full rollback.",
-    tags: ["Jenkins", "ArgoCD", "GKE", "Docker"],
+    title: "CI/CD & Release Pipeline",
+    desc: "Jenkins, Maven and SonarQube pipelines with parallel agents and Git webhooks, growing into production pipelines that publish to Nexus and release golden VM images.",
+    tags: ["Jenkins", "Maven", "SonarQube", "Nexus"],
     span: 5,
-    year: "2023",
-    caseStudy: caseStudyHref("cicd-pipeline-platform"),
+    year: "2017 –",
+    caseStudy: caseStudyHref("cicd-release-pipeline"),
   },
   {
     id: "03",
-    title: "Kubernetes Orchestration",
-    desc: "200+ microservices on GKE with HPA, PDB, and custom operators. 99.97% uptime SLA across 3 production clusters.",
-    tags: ["Kubernetes", "Helm", "Prometheus"],
+    title: "Disaster Recovery & Reliability",
+    desc: "Failover and failback tests with Managed Instance Groups, Storage Transfer Service and snapshots; patching with rollback plans; scheduled Cloud SQL backups and incident RCA.",
+    tags: ["DR", "MIG", "Cloud SQL", "Runbooks"],
     span: 5,
-    year: "2023",
-    caseStudy: caseStudyHref("kubernetes-orchestration"),
+    year: "2024 –",
+    caseStudy: caseStudyHref("disaster-recovery-reliability"),
   },
   {
     id: "04",
     title: "Infrastructure as Code",
-    desc: "Full-stack IaC with Terraform modules, Ansible playbooks, and GitOps. 100% reproducible across dev/staging/prod.",
-    tags: ["Terraform", "Ansible", "GitOps"],
+    desc: "Reusable Terraform modules for Compute Engine, VPC, IAM, Cloud Storage and load balancers, with Ansible for servers and deployments — the same resources in every environment.",
+    tags: ["Terraform", "Ansible", "Python"],
     span: 7,
-    year: "2022",
+    year: "2021–23",
     caseStudy: caseStudyHref("infrastructure-as-code"),
   },
 ];
 
 const SYSTEMS = {
   "01": {
-    labels: ["Terraform", "Multi-region", "VPC peering", "Cloud Armor", "Failover"],
+    labels: ["Cloud DNS", "HTTPS LB", "Cloud Armor", "OWASP rules", "Preview → Block"],
     lines: [[18, 50, 42, 28], [18, 50, 42, 72], [42, 28, 74, 28], [42, 72, 74, 72]],
     nodes: [[18, 50], [42, 28], [42, 72], [74, 28], [74, 72]],
   },
   "02": {
-    labels: ["Jenkins", "Docker", "ArgoCD", "GKE", "Production", "Rollback"],
+    labels: ["Git", "Jenkins", "Maven", "Nexus", "Release"],
     lines: [[14, 50, 38, 28], [14, 50, 38, 72], [38, 28, 68, 50], [38, 72, 68, 50], [68, 50, 88, 28], [68, 50, 88, 72]],
     nodes: [[14, 50], [38, 28], [38, 72], [68, 50], [88, 28], [88, 72]],
   },
   "03": {
-    labels: ["GKE", "Services", "HPA", "PDB", "Helm", "Prometheus"],
+    labels: ["Failover", "Failback", "MIG", "Snapshots", "Runbooks"],
     lines: [[18, 50, 42, 28], [18, 50, 42, 72], [42, 28, 72, 28], [42, 72, 72, 72], [72, 28, 88, 50], [72, 72, 88, 50]],
     nodes: [[18, 50], [42, 28], [42, 72], [72, 28], [72, 72], [88, 50]],
   },
   "04": {
-    labels: ["Terraform", "Ansible", "GitOps", "Dev", "Staging", "Prod"],
+    labels: ["Terraform", "Modules", "Ansible", "VPC", "Storage"],
     lines: [[16, 50, 40, 28], [16, 50, 40, 72], [40, 28, 72, 28], [40, 72, 72, 72], [72, 28, 88, 50], [72, 72, 88, 50]],
     nodes: [[16, 50], [40, 28], [40, 72], [72, 28], [72, 72], [88, 50]],
   },
@@ -134,7 +134,7 @@ export default function SelectedWorks() {
             </h2>
           </div>
           <p style={{ fontSize: "0.83rem", color: "var(--ink-muted)", maxWidth: "34ch", lineHeight: 1.75 }}>
-            Infrastructure and automation work across enterprise SaaS and cloud-native platforms.
+            Security, delivery and reliability work on GCP, from banking analytics to automation.
           </p>
         </div>
 

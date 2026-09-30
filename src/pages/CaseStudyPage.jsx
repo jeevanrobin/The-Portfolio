@@ -24,6 +24,7 @@ function SectionBody({ section }) {
               title={section.mapTitle}
               description={section.mapDescription}
               headerLabel={section.headerLabel}
+              headerMeta={section.headerMeta}
               disclosure={section.disclosure}
             />
           </div>

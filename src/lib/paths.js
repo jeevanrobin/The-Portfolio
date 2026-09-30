@@ -2,9 +2,9 @@
 export const BASE = import.meta.env.BASE_URL;
 
 export const CASE_STUDY_SLUGS = [
-  "gcp-cloud-architecture",
-  "cicd-pipeline-platform",
-  "kubernetes-orchestration",
+  "cloud-armor-load-balancing",
+  "cicd-release-pipeline",
+  "disaster-recovery-reliability",
   "infrastructure-as-code",
 ];
 

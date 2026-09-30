@@ -1,29 +1,14 @@
 import { useState } from "react";
 import useReducedMotion from "../hooks/useReducedMotion";
 
-const DEFAULT_NODES = [
-  { id: "terraform", label: "Terraform", x: 12, y: 50 },
-  { id: "regions", label: "Multi-region infrastructure", x: 42, y: 28 },
-  { id: "peering", label: "VPC peering", x: 42, y: 72 },
-  { id: "armor", label: "Cloud Armor WAF", x: 76, y: 28 },
-  { id: "failover", label: "Automated failover", x: 76, y: 72 },
-];
-
-const DEFAULT_LINKS = [
-  ["terraform", "regions"],
-  ["terraform", "peering"],
-  ["regions", "armor"],
-  ["peering", "failover"],
-];
-
 export default function CaseStudyArchitecture({
-  activeNode = "regions",
-  nodes = DEFAULT_NODES,
-  links = DEFAULT_LINKS,
-  title = "GCP Cloud Architecture conceptual map",
-  description = "A documented relationship between Terraform, multi-region infrastructure, VPC peering, Cloud Armor WAF, and automated failover.",
+  activeNode,
+  nodes,
+  links,
+  title,
+  description,
   headerLabel = "Architecture map",
-  headerMeta = "Documented scope",
+  headerMeta = "Conceptual map",
   disclosure,
 }) {
   const reducedMotion = useReducedMotion();

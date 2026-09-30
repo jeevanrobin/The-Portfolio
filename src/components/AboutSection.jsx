@@ -22,10 +22,10 @@ export default function AboutSection() {
 
           <div ref={bioRef} className={`reveal${bioRevealed ? " is-revealed" : ""}`} style={{ paddingTop: "0.25rem" }}>
             <p style={{ fontSize: "0.9rem", color: "var(--ink-muted)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
-              I'm a GCP-certified DevOps and SRE engineer with <strong style={{ color: "var(--ink)", fontWeight: 500 }}>8+ years in IT</strong>, designing infrastructure that scales quietly and fails gracefully.
+              I'm a GCP DevOps and SRE engineer with <strong style={{ color: "var(--ink)", fontWeight: 500 }}>8+ years in IT</strong>, more than six of them building, securing and running infrastructure on Google Cloud.
             </p>
             <p style={{ fontSize: "0.9rem", color: "var(--ink-muted)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
-              Currently at <strong style={{ color: "var(--ink)", fontWeight: 500 }}>EY LLP</strong>, I lead cloud platform engineering for enterprise clients — building the reliability layer that makes everything else possible.
+              Currently at <strong style={{ color: "var(--ink)", fontWeight: 500 }}>EY LLP</strong>, working for HSBC, I look after production reliability for an enterprise analytics platform in a regulated banking environment — from Cloud Armor and load balancing to DR tests and patching.
             </p>
             <p style={{ fontSize: "0.82rem", color: "var(--ink-dim)", lineHeight: 1.8 }}>
               B.Tech Computer Science · JNTU Hyderabad · 2017

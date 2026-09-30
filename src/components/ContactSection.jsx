@@ -7,7 +7,7 @@ const SOCIALS = [
   { label: "Email",    href: "mailto:medidajeevanreddy499@gmail.com",                       letter: "@" },
 ];
 
-const TICKER = "GCP Architect · Kubernetes Platform · CI/CD Pipelines · SRE Practice · Terraform IaC · Cloud Security · ";
+const TICKER = "GCP Infrastructure · Cloud Security · CI/CD Pipelines · Disaster Recovery · Terraform IaC · Site Reliability · ";
 
 export default function ContactSection() {
   const [headRef, headRevealed] = useReveal();

@@ -4,7 +4,7 @@
   --bg-raised:     #0d0d0d;
   --ink:           #ebebeb;
   --ink-muted:     rgba(235,235,235,0.72);
-  --ink-dim:       rgba(235,235,235,0.48);
+  --ink-dim:       rgba(235,235,235,0.6);
   --accent:        #4E85BF;
   --accent-light:  #89AACC;
   --border:        rgba(255,255,255,0.07);
@@ -409,7 +409,7 @@ section[id] { scroll-margin-top: 80px; }
 }
 .hero-recruiter a:hover, .hero-recruiter a:focus-visible { color: var(--ink); border-bottom-color: rgba(137,170,204,0.5); }
 
-/* Right column: platform map + certification */
+/* Right column: platform map */
 .hero-side { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
 .hero-map {
   padding: 1rem 1rem 0.75rem;
@@ -449,16 +449,6 @@ section[id] { scroll-margin-top: 80px; }
 .hero-map-node:hover text { fill: var(--ink); }
 .hero-map-node.is-core circle { filter: drop-shadow(0 0 6px rgba(137,170,204,0.55)); }
 .hero-map-node.is-core text { fill: var(--ink); }
-.hero-certification {
-  display: grid; grid-template-columns: auto 1fr; align-items: center;
-  gap: 0.35rem 0.7rem;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid rgba(137,170,204,0.2);
-  background: rgba(6,6,6,0.42);
-}
-.hero-certification .certification-mark { grid-row: 1 / 3; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--accent-light); border-radius: 50%; color: var(--accent-light); font: italic 1rem 'Instrument Serif', serif; }
-.hero-certification strong { color: var(--ink); font: 500 0.68rem 'Inter', sans-serif; line-height: 1.35; }
-.hero-certification .certification-meta { color: var(--ink-dim); font: 0.56rem 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
 
 /* Stats row */
 .hero-stats {
@@ -494,14 +484,10 @@ section[id] { scroll-margin-top: 80px; }
 .contact-system-line { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem; color: var(--accent-light); }
 .contact-system-line span { width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; }
 .contact-system-line i { width: clamp(2rem, 12vw, 10rem); height: 1px; background: linear-gradient(90deg, currentColor, transparent); opacity: 0.5; }
-.contact-email { font-family: 'Inter', sans-serif !important; font-style: normal !important; font-weight: 500; letter-spacing: -0.045em !important; }
+.contact-email { max-width: 100%; overflow-wrap: anywhere; font-family: 'Inter', sans-serif !important; font-style: normal !important; font-weight: 500; letter-spacing: -0.045em !important; }
 .recruiter-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .recruiter-actions a { display: inline-flex; align-items: center; min-height: 38px; padding: 0.55rem 0.8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--ink-muted); background: rgba(255,255,255,0.02); font-size: 0.72rem; text-decoration: none; transition: color 200ms ease, border-color 200ms ease, background 200ms ease; }
 .recruiter-actions a:hover, .recruiter-actions a:focus-visible { color: var(--ink); border-color: rgba(137,170,204,0.45); background: var(--surface); }
-.hero-certification { min-width: 255px; padding: 0.7rem 0.85rem; border: 1px solid rgba(137,170,204,0.2); background: rgba(6,6,6,0.42); }
-.hero-certification .certification-mark { grid-row: 1 / 3; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--accent-light); border-radius: 50%; color: var(--accent-light); font: italic 1rem 'Instrument Serif', serif; }
-.hero-certification strong { color: var(--ink); font: 500 0.68rem 'Inter', sans-serif; line-height: 1.35; }
-.hero-certification .certification-meta { color: var(--ink-dim); font: 0.56rem 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
 .contact-recruiter-panel { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 5rem; padding: 1.5rem; border: 1px solid rgba(137,170,204,0.18); background: linear-gradient(120deg, rgba(78,133,191,0.11), rgba(255,255,255,0.018)); }
 .contact-recruiter-panel > div:first-child { display: grid; gap: 0.45rem; }
 .contact-recruiter-panel strong { color: var(--ink); font-size: 0.9rem; font-weight: 500; }
@@ -525,7 +511,7 @@ section[id] { scroll-margin-top: 80px; }
 .how-list { list-style: none; margin: 0; padding: 0; min-width: 0; }
 .how-item { position: relative; padding: 2.25rem 0 2.25rem 2.25rem; border-left: 1px solid var(--border); }
 .how-item::before { content: ""; position: absolute; left: -2px; top: 2.25rem; width: 3px; height: 2.4rem; background: transparent; transition: background 300ms ease, height 300ms ease, box-shadow 300ms ease; }
-.how-num { display: block; margin-bottom: 0.9rem; color: rgba(137,170,204,0.28); font: 500 0.72rem 'JetBrains Mono', monospace; letter-spacing: 0.2em; transition: color 300ms ease; }
+.how-num { display: block; margin-bottom: 0.9rem; color: rgba(137,170,204,0.82); font: 500 0.72rem 'JetBrains Mono', monospace; letter-spacing: 0.2em; transition: color 300ms ease; }
 .how-item h3 { margin: 0 0 0.9rem; color: var(--ink-dim); font: 600 0.95rem 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.14em; transition: color 300ms ease; }
 .how-desc { margin: 0; max-width: 52ch; color: var(--ink-muted); font-size: 0.95rem; line-height: 1.8; transition: color 300ms ease; }
 .how-terms { margin: 1.1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--border-soft); max-width: 52ch; color: var(--ink-dim); font: 0.62rem 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; transition: color 300ms ease, border-color 300ms ease; }
