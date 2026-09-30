@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jeevanrobin.github.io/The-Portfolio/sitemap.xml
