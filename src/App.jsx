@@ -13,6 +13,7 @@ import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 import { matchCaseStudy, stripBase, withBase } from "./lib/paths";
+import { startSmoothScroll } from "./lib/smoothScroll";
 
 const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
 
@@ -31,6 +32,8 @@ function getInitialRoute() {
 export default function App() {
   const [route] = useState(getInitialRoute);
   const caseStudySlug = matchCaseStudy(route);
+
+  useEffect(() => startSmoothScroll(), []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

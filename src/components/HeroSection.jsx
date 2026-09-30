@@ -53,6 +53,34 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, [reducedMotion]);
 
+  // Scroll parallax: video drifts slower than the page, content eases down and fades.
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (reducedMotion || !hero) return undefined;
+    const bg = hero.querySelector(".hero-parallax-bg");
+    const content = hero.querySelector(".hero-content");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const height = hero.offsetHeight;
+      if (y > height) return;
+      bg.style.transform = `translate3d(0, ${y * 0.3}px, 0)`;
+      content.style.transform = `translate3d(0, ${y * 0.12}px, 0)`;
+      content.style.opacity = String(1 - Math.min(y / height, 1) * 0.75);
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+      bg.style.transform = "";
+      content.style.transform = "";
+      content.style.opacity = "";
+    };
+  }, [reducedMotion]);
+
   return (
     <section id="home" ref={heroRef} style={{
       position: "relative",
@@ -61,7 +89,11 @@ export default function HeroSection() {
       alignItems: "center",
       overflow: "hidden",
     }}>
-      <VideoBackground overlay="rgba(0,0,0,0.62)" />
+      <div className="hero-parallax-bg" style={{ position: "absolute", inset: 0, willChange: "transform" }}>
+        <VideoBackground overlay="rgba(0,0,0,0.62)" />
+      </div>
+      {/* Static bottom fade so the hero still blends into the next section while the video drifts */}
+      <div aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "14rem", zIndex: 1, pointerEvents: "none", background: "linear-gradient(to top, #0a0a0a, transparent)" }} />
 
       {/* Dot grid */}
       <div style={{

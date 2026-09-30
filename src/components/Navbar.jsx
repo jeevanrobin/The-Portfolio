@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import useReducedMotion from "../hooks/useReducedMotion";
 import { withBase } from "../lib/paths";
+import { scrollToTarget } from "../lib/smoothScroll";
 import useResumeAvailability from "../hooks/useResumeAvailability";
 
 const LINKS = [
@@ -18,7 +18,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
   const wasMenuOpen = useRef(false);
-  const reducedMotion = useReducedMotion();
   const resumeReady = useResumeAvailability();
   const resumeUrl = withBase("resume.pdf");
 
@@ -56,7 +55,7 @@ export default function Navbar() {
   }, []);
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+    scrollToTarget(document.getElementById(id));
     setActive(id);
     setMenuOpen(false);
   };
