@@ -55,7 +55,7 @@ test("every project card links to an existing case study", async ({ page }) => {
 
 for (const viewport of [{ name: "desktop", width: 1280, height: 900 }, { name: "mobile", width: 390, height: 844 }]) {
   test.describe(viewport.name, () => {
-    test.use({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: "reduce" });
+    test.use({ viewport: { width: viewport.width, height: viewport.height }, contextOptions: { reducedMotion: "reduce" } });
 
     for (const path of ["./", ...SLUGS.map(slug => `case-studies/${slug}`)]) {
       test(`${path} has no serious accessibility violations`, async ({ page }) => {
@@ -75,3 +75,42 @@ for (const viewport of [{ name: "desktop", width: 1280, height: 900 }, { name: "
     }
   });
 }
+
+test.describe("smooth scrolling", () => {
+  test("wheel scrolling is eased and nav clicks land on the section", async ({ page }) => {
+    await page.goto("./");
+    await expect(page.locator("html")).toHaveClass(/lenis/);
+    await page.mouse.move(600, 400);
+    await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(150);
+    const mid = await page.evaluate(() => window.scrollY);
+    expect(mid).toBeGreaterThan(0);
+    expect(mid).toBeLessThan(570); // still easing toward its target
+    await page.getByRole("navigation").getByText("Skills", { exact: true }).first().click();
+    await expect.poll(() => page.evaluate(() => Math.round(document.getElementById("skills").getBoundingClientRect().top)), { timeout: 5000 }).toBe(80);
+  });
+
+  test("case-study index links land on their section", async ({ page }) => {
+    await page.goto("case-studies/cicd-release-pipeline");
+    await page.locator(".case-study-index a").nth(3).click();
+    await expect.poll(() => page.evaluate(() => Math.round(document.getElementById("cicd-release-pipeline-architecture").getBoundingClientRect().top)), { timeout: 5000 }).toBe(80);
+  });
+
+  test("hero parallax responds to scroll", async ({ page }) => {
+    await page.goto("./");
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect.poll(() => page.evaluate(() => document.querySelector(".hero-parallax-bg").style.transform)).toContain("120px");
+  });
+
+  test.describe("reduced motion", () => {
+    test.use({ contextOptions: { reducedMotion: "reduce" } });
+
+    test("uses native scrolling and no parallax", async ({ page }) => {
+      await page.goto("./");
+      await expect(page.locator("html")).not.toHaveClass(/lenis/);
+      await page.getByRole("navigation").getByText("Skills", { exact: true }).first().click();
+      await expect.poll(() => page.evaluate(() => Math.round(document.getElementById("skills").getBoundingClientRect().top))).toBe(80);
+      expect(await page.evaluate(() => document.querySelector(".hero-parallax-bg").style.transform)).toBe("");
+    });
+  });
+});

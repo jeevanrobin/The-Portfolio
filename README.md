@@ -36,6 +36,7 @@ the experience, skills, stats and case-study text to match.
   renders them all. To add one, add an entry there, add its slug to `CASE_STUDY_SLUGS` in
   `src/lib/paths.js`, and link it from `src/components/SelectedWorks.jsx`. Tests fail if the
   two lists drift apart.
+- **Smooth scrolling** — Lenis inertial scrolling plus a hero parallax (`src/lib/smoothScroll.js`, `HeroSection.jsx`). It is off for users with reduced-motion enabled, and touch devices keep native scrolling. Route in-page links through `scrollToTarget` rather than `scrollIntoView`.
 - **Fonts** — self-hosted through `@fontsource` (imported in `src/main.jsx`), no third-party font requests.
 - **Dependencies** — Dependabot opens monthly update PRs (`.github/dependabot.yml`).
 - **SEO** — `index.html` (meta/OG tags), `public/og-image.png` (social preview, 1200×630),
